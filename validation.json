@@ -6,10 +6,10 @@
   "livePreflight": "PASS: admin, proposer, current delays, bounds, operation hash and unused salt",
   "forkTestCompilation": "PASS: solc 0.8.34",
   "forkSimulation": "PASS: 3 passed; 0 failed; 0 skipped",
-  "governanceLifecycleSimulation": "NOT RUN",
-  "proposerEligibility": "NOT VERIFIED: no proposer wallet specified",
+  "governanceLifecycleSimulation": "PASS: 4 passed; 0 failed; 0 skipped; both published submissions proposed, voted, queued and executed through the existing Governor",
+  "proposerEligibility": "Verified on fork for impersonated existing delegate 0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5; eventual submitting wallet not specified or verified",
   "blockHash": "0xdf709374144ccf5a15919d1543b4a09825a29c9dc4008e9b8c7da1a5da23e68d",
-  "forkScope": "Real mainnet contracts and storage; exact actions queued and executed through Governor Timelock; Governor impersonated. No voting lifecycle simulation.",
+  "forkScope": "Action tests impersonate Governor at Governor Timelock. Lifecycle tests impersonate existing delegates, submit exact published unsigned payloads to live Governor and complete voting/quorum/queue/execute. No storage, token balance, vote or quorum manipulation.",
   "rpc": "https://rpc.flashbots.net",
   "forgeVersion": "1.7.1",
   "solcVersion": "0.8.34",
@@ -30,5 +30,48 @@
       "gas": 331813
     }
   ],
-  "transactionsBroadcast": false
+  "transactionsBroadcast": false,
+  "combinedForkSimulation": "PASS: 7 passed; 0 failed; 0 skipped",
+  "ci": {
+    "repository": "umersin61/compound-treasury-delay-proposal",
+    "pullRequest": 1,
+    "sourceCommit": "412805feca6c35ad20ac2a030868bea3e9a526ac",
+    "runId": 36842316875,
+    "status": "success",
+    "jobs": {
+      "prepare": 110304071227,
+      "actionScenarios": 110304071454,
+      "gasProfiler": 110304071522,
+      "governanceEnactment": 110304071628
+    }
+  },
+  "lifecycleTests": [
+    {
+      "name": "testBothPublishedSubmissionsThroughFullGovernance",
+      "status": "PASS",
+      "gas": 2040708
+    },
+    {
+      "name": "testIneligibleAccountCannotSubmitPublishedProposal",
+      "status": "PASS",
+      "gas": 44630
+    },
+    {
+      "name": "testProposalWithoutVotesIsDefeated",
+      "status": "PASS",
+      "gas": 921170
+    },
+    {
+      "name": "testProposerCanCancelPendingPublishedProposal",
+      "status": "PASS",
+      "gas": 929051
+    }
+  ],
+  "tenderlySimulation": "NOT RUN: no publishing access available",
+  "notVerified": [
+    "Eventual submitting wallet eligibility",
+    "Guardian intervention",
+    "Actual delegate endorsement or voting intentions",
+    "Concurrent live treasury actions"
+  ]
 }

@@ -1,0 +1,19 @@
+Compiling 2 files with Solc 0.8.34
+Solc 0.8.34 finished in 330.13ms
+Compiler run successful!
+
+Ran 3 tests for test/TreasuryDelays.t.sol:TreasuryDelaysForkTest
+[PASS] testCooldownFirstRevertsAtPinnedConfiguration() (gas: 35211)
+[PASS] testGovernanceCanCancelScheduledDelayChange() (gas: 705805)
+[PASS] testTwoStageExecution() (gas: 827040)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 1.43s (708.45ms CPU time)
+
+Ran 4 tests for test/GovernanceLifecycle.t.sol:GovernanceLifecycleForkTest
+[PASS] testBothPublishedSubmissionsThroughFullGovernance() (gas: 3608032)
+[PASS] testIneligibleAccountCannotSubmitPublishedProposal() (gas: 144112)
+[PASS] testProposalWithoutVotesIsDefeated() (gas: 1117746)
+[PASS] testProposerCanCancelPendingPublishedProposal() (gas: 1219143)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 2.10s (3.25s CPU time)
+
+
+Ran 2 test suites in 2.11s (3.53s CPU time): 7 tests passed, 0 failed, 0 skipped (7 total tests)
