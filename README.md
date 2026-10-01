@@ -16,7 +16,9 @@ Transaction payloads and a reproducible Ethereum mainnet fork simulation for inc
 | 4 | Run Enact by Delegator | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071628) | Success |
 | 5 | ABI encoding / deterministic payload unit checks | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071227) | Success |
 | 6 | Contract formatting | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071454) | Success |
-| 7 | Tenderly Simulation (mainnet) | — | Not run: no publishing access available |
+| 7 | Tenderly proposal submission simulations (mainnet) | [Proposal 1](https://dashboard.tenderly.co/shared/simulation/4ea0a48e-b048-4ce0-b714-3c4f3ab2daea) · [Proposal 2](https://dashboard.tenderly.co/shared/simulation/0ad27016-028e-44d5-bba1-15774cc41973) | Success: submission only |
+
+Tenderly links show two independent `propose(...)` submission simulations at mainnet block 26,094,833 using the exact published unsigned calldata and an impersonated existing delegate. Both succeeded without storage, balance, vote or quorum overrides. Each independent simulation returns proposal ID 612; neither is a sequential enactment or proof of final treasury state. Full two-stage voting, queueing and execution are covered by the seven passing Foundry fork tests. Bundled Tenderly simulations require an upgrade on the current account.
 
 This is a treasury configuration proposal. No Comet deployment, market migration, or new Solidity implementation is included. Comet market scenarios, its unit suite, Slither, Semgrep, ESLint and Solhint from the Comet proposal pipeline were not run. The successful checks above apply to this repository and do not imply completion of those other checks. Gas values are fork test measurements, not transaction fee quotes.
 
