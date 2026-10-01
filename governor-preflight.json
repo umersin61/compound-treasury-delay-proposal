@@ -1,0 +1,7 @@
+{
+  "blockNumber": 26094833,
+  "governor.timelock": "0x6d903f6003cca6255d85cca4d3b5e5146dc33925",
+  "governor.votingDelay": "13140",
+  "governor.votingPeriod": "19710",
+  "governor.proposalThreshold": "25000000000000000000000"
+}

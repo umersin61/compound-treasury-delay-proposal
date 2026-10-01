@@ -1,0 +1,34 @@
+{
+  "chainId": 1,
+  "blockNumber": 26094833,
+  "blockTimeUTC": "2026-10-01T03:39:23+00:00",
+  "abiEncoding": "PASS: independent eth_abi and ethers encoders agree",
+  "livePreflight": "PASS: admin, proposer, current delays, bounds, operation hash and unused salt",
+  "forkTestCompilation": "PASS: solc 0.8.34",
+  "forkSimulation": "PASS: 3 passed; 0 failed; 0 skipped",
+  "governanceLifecycleSimulation": "NOT RUN",
+  "proposerEligibility": "NOT VERIFIED: no proposer wallet specified",
+  "blockHash": "0xdf709374144ccf5a15919d1543b4a09825a29c9dc4008e9b8c7da1a5da23e68d",
+  "forkScope": "Real mainnet contracts and storage; exact actions queued and executed through Governor Timelock; Governor impersonated. No voting lifecycle simulation.",
+  "rpc": "https://rpc.flashbots.net",
+  "forgeVersion": "1.7.1",
+  "solcVersion": "0.8.34",
+  "tests": [
+    {
+      "name": "testCooldownFirstRevertsAtPinnedConfiguration",
+      "status": "PASS",
+      "gas": 9495
+    },
+    {
+      "name": "testGovernanceCanCancelScheduledDelayChange",
+      "status": "PASS",
+      "gas": 284870
+    },
+    {
+      "name": "testTwoStageExecution",
+      "status": "PASS",
+      "gas": 331813
+    }
+  ],
+  "transactionsBroadcast": false
+}

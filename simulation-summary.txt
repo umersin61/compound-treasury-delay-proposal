@@ -1,0 +1,5 @@
+[PASS] testCooldownFirstRevertsAtPinnedConfiguration() (gas: 9495)
+[PASS] testGovernanceCanCancelScheduledDelayChange() (gas: 284870)
+[PASS] testTwoStageExecution() (gas: 331813)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 17.91s (4.81s CPU time)
+Ran 1 test suite in 25.90s (17.91s CPU time): 3 tests passed, 0 failed, 0 skipped (3 total tests)

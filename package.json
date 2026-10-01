@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "verify": "node verify_payloads.cjs"
+  },
+  "dependencies": {
+    "ethers": "6.17.0"
+  }
+}

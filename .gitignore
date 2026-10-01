@@ -1,0 +1,8 @@
+cache/
+out/
+node_modules/
+pydeps/
+__pycache__/
+.venv/
+.env
+forum-post.txt

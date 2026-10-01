@@ -1,0 +1,24 @@
+{
+  "targets": [
+    "0xDcB34b56842F853A69E86De5A0c22c49d97C130C",
+    "0xDcB34b56842F853A69E86De5A0c22c49d97C130C",
+    "0xefeD08b791423C7D7937507Cf840E86a7ddC11c1",
+    "0xefeD08b791423C7D7937507Cf840E86a7ddC11c1",
+    "0xefeD08b791423C7D7937507Cf840E86a7ddC11c1"
+  ],
+  "values": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "calldatas": [
+    "0xadbab6c30000000000000000000000000000000000000000000000000000000000166980",
+    "0x87acd00900000000000000000000000000000000000000000000000000000000000d2f00",
+    "0x2f2ff15dd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e630000000000000000000000006d903f6003cca6255d85cca4d3b5e5146dc33925",
+    "0x2f2ff15dfd643c72710c63c0180259aba6b2d05451e3591a24e58b62239378085726f7830000000000000000000000006d903f6003cca6255d85cca4d3b5e5146dc33925",
+    "0x01d5062a000000000000000000000000efed08b791423c7d7937507cf840e86a7ddc11c1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000000703a0be5ed4c07d8ca94f71da77bd59768fc6588d87567765ac518e895705aaa000000000000000000000000000000000000000000000000000000000002a300000000000000000000000000000000000000000000000000000000000000002464d6235300000000000000000000000000000000000000000000000000000000000d2f0000000000000000000000000000000000000000000000000000000000"
+  ],
+  "description": "# Aligning Treasury Delays with the Governance Process\n\nSet the Treasury Escrow expiration to 17 days from initiation, then its withdrawal cooldown to 10 days. Grant the Governor Timelock EXECUTOR_ROLE and CANCELLER_ROLE on the Treasury Timelock. Schedule a Treasury Timelock self-call to updateDelay(864000), using its existing 172800-second minimum delay. A separate execution is required once that operation becomes ready.\n\nTreasury assets administered by the TMC shall be held in the Treasury Escrow or in contracts owned by the Treasury Timelock. The TMC Safe may hold treasury assets only in transit, for no longer than needed to complete a disbursement that has passed through the Escrow cooldown or the Treasury Timelock delay. This clause is a governance instruction and is not enforced by the executable calls.\n\nForum: https://www.comp.xyz/t/aligning-treasury-delays-with-the-governance-process/8098\n\nOperation ID: 0x953db1c078de556930197fab4266b633d0b7fd28477d9028de81a438e6c6214d"
+}
