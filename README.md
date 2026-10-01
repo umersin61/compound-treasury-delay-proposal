@@ -2,7 +2,38 @@
 
 Transaction payloads and a reproducible Ethereum mainnet fork simulation for increasing the Treasury Escrow withdrawal cooldown and Treasury Timelock minimum delay to 10 days.
 
-**Fork result: 3 passed, 0 failed, 0 skipped.**
+**Fork result: 7 passed, 0 failed, 0 skipped.** Both published submissions passed through proposal creation, voting, quorum, queueing and execution on the existing Governor.
+
+[Proposal review PR](https://github.com/umersin61/compound-treasury-delay-proposal/pull/1) · [Successful validation run](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875)
+
+## Actions
+
+| № | Action name | Link | Status |
+| --- | --- | --- | --- |
+| 1 | Prepare Migration | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071227) | Success |
+| 2 | Run Forge Tests / treasury scenarios | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071454) | Success |
+| 3 | Run Tests With Gas Profiler | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071522) | Success |
+| 4 | Run Enact by Delegator | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071628) | Success |
+| 5 | ABI encoding / deterministic payload unit checks | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071227) | Success |
+| 6 | Contract formatting | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/job/110304071454) | Success |
+| 7 | Tenderly Simulation (mainnet) | — | Not run: no publishing access available |
+
+This is a treasury configuration proposal. No Comet deployment, market migration, or new Solidity implementation is included. Comet market scenarios, its unit suite, Slither, Semgrep, ESLint and Solhint from the Comet proposal pipeline were not run. The successful checks above apply to this repository and do not imply completion of those other checks. Gas values are fork test measurements, not transaction fee quotes.
+
+## Artifacts
+
+| № | Name | Value |
+| --- | --- | --- |
+| 1 | Proposal package | `treasury-delays-8098` |
+| 2 | Branch name | `treasury-delays/full-governance-validation` |
+| 3 | Prepare id | `36842316875` |
+| 4 | Network | `mainnet` |
+| 5 | Contracts | Treasury Escrow / Treasury Timelock |
+| 6 | Validated source commit | `412805feca6c35ad20ac2a030868bea3e9a526ac` |
+| 7 | Prepared payload artifact | [Download](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/artifacts/11152420261) |
+| 8 | Governor enactment artifact | [Download](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36842316875/artifacts/11150899328) |
+
+The recorded run validates the immutable source commit above. Later documentation commits preserve that source and payloads. Full enactment traces are also committed as `governance-enactment.log` so reviewers can read them without downloading a CI artifact.
 
 | Environment | Value |
 | --- | --- |
@@ -36,15 +67,19 @@ The second payload executes the identical scheduled operation after it becomes r
 
 ## Simulation scope
 
-The Foundry tests use real mainnet contract bytecode and storage. They impersonate the current Governor to queue and execute the exact actions through the existing Governor Timelock.
+The Foundry tests use real mainnet contract bytecode and storage. The action tests impersonate the current Governor to queue and execute the exact actions through the existing Governor Timelock. The additional lifecycle tests read the exact `data` bytes in both published unsigned submission files and call the existing Governor, using existing eligible delegate checkpoints and simulated votes. They never edit contract storage, token balances, delegation or quorum.
 
 | Test | Result | Checks |
 | --- | --- | --- |
 | `testTwoStageExecution` | PASS | Ordered actions, resulting settings, both roles, operation readiness, early execution rejection, final 10-day delay |
 | `testGovernanceCanCancelScheduledDelayChange` | PASS | Cancellation succeeds and prevents later execution |
 | `testCooldownFirstRevertsAtPinnedConfiguration` | PASS | Increasing the cooldown before expiration reverts |
+| `testBothPublishedSubmissionsThroughFullGovernance` | PASS | Both complete submissions, eligible proposer, real vote checkpoints, quorum, voting clocks, queueing, Governor timelock, early queue/execution rejection, final settings |
+| `testIneligibleAccountCannotSubmitPublishedProposal` | PASS | Governor rejects the published submission from an ineligible account |
+| `testProposalWithoutVotesIsDefeated` | PASS | A proposal without votes is defeated and cannot be queued |
+| `testProposerCanCancelPendingPublishedProposal` | PASS | Proposer cancels through the Governor; canceled proposal cannot be queued |
 
-This verifies action execution. Proposer eligibility, voting, quorum, guardians and the full governance lifecycle were not simulated. No transactions were broadcast. Existing requests and operations retain their timing. The custody instruction in the first vote description has no separate enforceable call.
+The successful lifecycle test impersonates `0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5` as proposer and voter, and `0xb06DF4dD01a5c5782f360aDA9345C87E86ADAe3D` as another voter. This is hypothetical consent, not delegate endorsement. Proposal IDs 612 and 613 exist only in the fork; no live proposal or transaction was submitted. The eventual submitting wallet's eligibility is not established by these tests. Guardian intervention, live participation, concurrent treasury actions and successful adoption are not guaranteed. Existing requests and operations retain their timing. The custody instruction in the first vote description has no separate enforceable call.
 
 ## Reproduce
 
@@ -59,7 +94,7 @@ MAINNET_RPC_URL=https://rpc.flashbots.net FORK_BLOCK=26094833 forge test -vvvv
 Independent ABI encoding checks:
 
 ```sh
-npm install
+npm ci
 npm run verify
 ```
 
@@ -70,6 +105,12 @@ python -m pip install -r requirements.txt
 python build_payloads.py
 ```
 
+Check regeneration without overwriting recorded evidence:
+
+```sh
+python scripts/check_rebuild.py
+```
+
 The builder also writes preflight request inputs for fresh state checks. Regeneration does not rerun or refresh the recorded fork evidence.
 
 ## Files
@@ -77,8 +118,12 @@ The builder also writes preflight request inputs for fresh state checks. Regener
 | File | Purpose |
 | --- | --- |
 | `test/TreasuryDelays.t.sol` | Executed fork test source |
+| `test/GovernanceLifecycle.t.sol` | Complete proposal and voting lifecycle test source |
+| `.github/workflows/proposal-validation.yml` | Reproducible public checks and artifact uploads |
 | `foundry.toml` | Compiler configuration |
 | `simulation.log` | Full `-vvvv` execution trace |
+| `governance-enactment.log` | Full published-submission enactment trace from GitHub Actions |
+| `gas-profile.log` | Gas-profiler test results for all seven tests |
 | `simulation-summary.txt` | Test result excerpt |
 | `validation.json` | Pinned environment, results and scope |
 | `live-preflight.json`, `governor-preflight.json` | Recorded pinned-state checks |
