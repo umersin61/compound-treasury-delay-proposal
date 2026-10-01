@@ -1,0 +1,114 @@
+name: Treasury proposal validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MAINNET_RPC_URL: https://rpc.flashbots.net
+  FORK_BLOCK: "26094833"
+  NO_COLOR: "1"
+
+jobs:
+  prepare:
+    name: Prepare Migration
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: npm ci --ignore-scripts
+      - run: python -m pip install -r requirements.txt
+      - name: Verify and reproduce published payloads
+        run: |
+          set -o pipefail
+          node --check verify_payloads.cjs
+          npm run verify | tee prepare.log
+          python scripts/check_rebuild.py | tee -a prepare.log
+          sha256sum --check SHA256SUMS | tee -a prepare.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prepared-treasury-delay-proposals
+          path: |
+            proposal-*.json
+            proposal-*-description.txt
+            transactions.json
+            prepare.log
+            SHA256SUMS
+
+  forge:
+    name: Run Forge Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.7.1
+      - run: forge fmt --check
+      - name: Treasury action scenarios
+        run: |
+          set -o pipefail
+          forge --version
+          forge test --match-contract TreasuryDelaysForkTest -vvvv | tee action-simulation.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: treasury-action-simulation
+          path: action-simulation.log
+
+  gas:
+    name: Tests Gas Profiler
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.7.1
+      - name: Profile forked target and governance calls
+        run: |
+          set -o pipefail
+          forge test --gas-report | tee gas-report.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: treasury-gas-profile
+          path: gas-report.log
+
+  enact:
+    name: Enact Migration by Delegator
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.7.1
+      - name: Both published submissions through live Governor
+        run: |
+          set -o pipefail
+          forge test --match-contract GovernanceLifecycleForkTest -vvvv | tee governance-enactment.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: treasury-governance-enactment
+          path: governance-enactment.log
