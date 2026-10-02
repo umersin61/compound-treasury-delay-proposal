@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  MAINNET_RPC_URL: https://rpc.flashbots.net
+  MAINNET_RPC_URL: https://ethereum-rpc.publicnode.com
   FORK_BLOCK: "26101617"
   NO_COLOR: "1"
 
