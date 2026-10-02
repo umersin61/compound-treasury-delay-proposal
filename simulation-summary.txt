@@ -1,6 +1,8 @@
-Mainnet block 26101617 (2026-10-02 02:21:23 UTC)
+Mainnet block 26104181 (2026-10-02 10:56:11 UTC)
 7 passed; 0 failed; 0 skipped
 Live preflight, ABI checks, deterministic regeneration, Cactus imports, formatting and all four CI jobs: PASS
 Both exact published submissions proposed, voted, queued and executed on the fork.
 Tenderly: both independent submissions PASS; submission only.
 No live transaction broadcast.
+
+First description matches final Cactus wallet formatting (Summary underline heading; single newline after title). Full governance fork block: 26104181. Independent Tenderly submission block: 26101617.

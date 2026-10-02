@@ -1,22 +1,20 @@
-> The first submission now matches the proposer’s final Cactus wallet description. Fresh validation is in progress; evidence links below currently refer to the prior description.
-
 # Compound treasury delay proposal
 
 Unsigned Ethereum mainnet governance submissions for increasing the Treasury Escrow withdrawal cooldown and Treasury Timelock minimum delay to 10 days.
 
-**7 fork tests passed, 0 failed, 0 skipped. All four CI jobs passed.** Both exact published submissions completed proposal creation, voting, quorum, queueing and execution through the existing Governor on a mainnet fork. The expanded first vote description includes the recent treasury movements reported in the forum and the custody instruction.
+**7 fork tests passed, 0 failed, 0 skipped. All four CI jobs passed.** Both exact published submissions completed proposal creation, voting, quorum, queueing and execution through the existing Governor on a mainnet fork. The first vote description includes the recent treasury movements reported in the forum and the custody instruction. Its exact Markdown now matches the proposer’s final Cactus wallet output, including the `Summary` underline heading and single newline after the title. The fresh lifecycle fork is pinned at block 26,104,181; the independent Tenderly submissions use block 26,101,617.
 
-[Successful validation run](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904) · [Validated source](https://github.com/umersin61/compound-treasury-delay-proposal/commit/4a7a53247743fa1c636dda0b81d02549c250b4e4) · [Submission instructions](SUBMISSION.md)
+[Successful validation run](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058) · [Validated source](https://github.com/umersin61/compound-treasury-delay-proposal/commit/8a38fb37aa588aad6b7917848331f3ef6362744b) · [Submission instructions](SUBMISSION.md)
 
 ## Actions
 
 | № | Action name | Link | Status |
 | --- | --- | --- | --- |
-| 1 | Prepare / live preflight / ABI and import checks | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082214) | Success |
-| 2 | Run Forge Tests / treasury scenarios and formatting | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082347) | Success |
-| 3 | Run Tests With Gas Profiler | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082275) | Success |
-| 4 | Run Enact by Delegator / both governance lifecycles | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082389) | Success |
-| 5 | Tenderly proposal submissions | [Proposal 1](https://dashboard.tenderly.co/shared/simulation/365871be-ff0d-4a64-8b11-ac489f75d788) · [Proposal 2](https://dashboard.tenderly.co/shared/simulation/cce3e1b0-d7fd-4e5b-9817-00d6705a2dcc) | Success: submission only |
+| 1 | Prepare / live preflight / ABI and import checks | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058/job/110810815772) | Success |
+| 2 | Run Forge Tests / treasury scenarios and formatting | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058/job/110810815414) | Success |
+| 3 | Run Tests With Gas Profiler | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058/job/110810815823) | Success |
+| 4 | Run Enact by Delegator / both governance lifecycles | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058/job/110810815704) | Success |
+| 5 | Tenderly proposal submissions | [Proposal 1](https://dashboard.tenderly.co/shared/simulation/98410cb7-91a6-424a-8daa-67b35a5d3ec2) · [Proposal 2](https://dashboard.tenderly.co/shared/simulation/cce3e1b0-d7fd-4e5b-9817-00d6705a2dcc) | Success: submission only |
 
 Two independent propose(...) submissions at mainnet block 26,101,617, using the exact published unsigned calldata and an impersonated existing eligible delegate. Both succeeded without storage, balance, vote or quorum overrides. Each returns simulated proposal ID 612. These links demonstrate submission only; the seven Foundry fork tests verify full two-stage governance and final treasury settings.
 
@@ -26,12 +24,12 @@ Two independent propose(...) submissions at mainnet block 26,101,617, using the 
 | --- | --- | --- |
 | 1 | Proposal package | `treasury-delays-8098` |
 | 2 | Branch | `main` |
-| 3 | Prepare id | `36956685904` |
+| 3 | Prepare id | `36998572058` |
 | 4 | Network | `mainnet` |
 | 5 | Contracts | Treasury Escrow / Treasury Timelock |
-| 6 | Validated source commit | `4a7a53247743fa1c636dda0b81d02549c250b4e4` |
-| 7 | Prepared payloads | [Download](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/artifacts/11205768590) |
-| 8 | Full governance enactment | [Download](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/artifacts/11206376411) |
+| 6 | Validated source commit | `8a38fb37aa588aad6b7917848331f3ef6362744b` |
+| 7 | Prepared payloads | [Download](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058/artifacts/11223045542) |
+| 8 | Full governance enactment | [Download](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058/artifacts/11222113847) |
 | 9 | Cactus imports | [First](proposal-1-cactus-actions.json) · [Follow-up](proposal-2-cactus-actions.json) |
 
 The immutable source commit above contains the tested submissions and import files. Later evidence and documentation commits preserve their executable bytes. Trace logs are also committed for review without artifact downloads.
@@ -41,9 +39,9 @@ The immutable source commit above contains the tested submissions and import fil
 | Parameter | Value |
 | --- | --- |
 | Chain | Ethereum mainnet (1) |
-| Pinned block | 26,101,617 |
-| Timestamp | 2026-10-02 02:21:23 UTC |
-| Block hash | `0x9c49a1271d9f1aca7145795adc96a2db65acb6843b4b62321a19845cd9b65217` |
+| Pinned block | 26,104,181 |
+| Timestamp | 2026-10-02 10:56:11 UTC |
+| Block hash | `0x4399bce4c47c9ceb0a39e9f77ae06c8aa885ff50f4c865caa5976acec47d5623` |
 | Forge / Solidity | 1.7.1 / 0.8.34 |
 | Proposer threshold | 25,000 delegated COMP at the prior block |
 | Voting delay / period | 13,140 / 19,710 blocks |
@@ -83,7 +81,7 @@ The submitting wallet remains unspecified and its eligibility is not established
 ## Reproduce
 
 ```sh
-MAINNET_RPC_URL=https://ethereum-rpc.publicnode.com FORK_BLOCK=26101617 forge test -vvvv
+MAINNET_RPC_URL=https://ethereum-rpc.publicnode.com FORK_BLOCK=26104181 forge test -vvvv
 npm ci --ignore-scripts
 npm run verify
 python -m pip install -r requirements.txt

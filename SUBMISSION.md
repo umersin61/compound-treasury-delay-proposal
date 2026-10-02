@@ -2,7 +2,7 @@
 
 Submit **proposal 1 only** now. Proposal 2 is a follow-up execution of the scheduled Treasury Timelock operation.
 
-The first description has been rebuilt to include the recent treasury movements reported in the forum. It and the exact submission passed full governance fork validation at mainnet block 26,101,617. The evidence and imports are already published on `main`; no further PR or merge is required to submit the proposal. A GitHub merge does not create an on-chain proposal.
+The first description has been rebuilt to include the recent treasury movements reported in the forum. It and the exact submission passed full governance fork validation at mainnet block 26,104,181. The evidence and imports are already published on `main`; no further PR or merge is required to submit the proposal. A GitHub merge does not create an on-chain proposal.
 
 ## 1. Publish the evidence update in the forum
 
@@ -115,8 +115,8 @@ Finally confirm Treasury Timelock `getMinDelay()` equals **`864000`** and the op
 
 ## Evidence
 
-- CI: https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904
-- First submission: https://dashboard.tenderly.co/shared/simulation/365871be-ff0d-4a64-8b11-ac489f75d788
+- CI: https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36998572058
+- First submission: https://dashboard.tenderly.co/shared/simulation/98410cb7-91a6-424a-8daa-67b35a5d3ec2
 - Follow-up submission: https://dashboard.tenderly.co/shared/simulation/cce3e1b0-d7fd-4e5b-9817-00d6705a2dcc
 
 Tenderly verifies two independent submissions only. Foundry verifies both complete governance lifecycles and the final contract state. No live transaction was broadcast during preparation.

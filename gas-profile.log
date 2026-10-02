@@ -1,20 +1,19 @@
-# GitHub Actions run 36956685904; source 4a7a53247743fa1c636dda0b81d02549c250b4e4; block 26101617
 Compiling 2 files with Solc 0.8.34
-Solc 0.8.34 finished in 285.16ms
+Solc 0.8.34 finished in 218.83ms
 Compiler run successful!
 
 Ran 3 tests for test/TreasuryDelays.t.sol:TreasuryDelaysForkTest
 [PASS] testCooldownFirstRevertsAtPinnedConfiguration() (gas: 35211)
 [PASS] testGovernanceCanCancelScheduledDelayChange() (gas: 705805)
 [PASS] testTwoStageExecution() (gas: 827040)
-Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 85.79ms (5.15ms CPU time)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 4.55s (2.50s CPU time)
 
 Ran 4 tests for test/GovernanceLifecycle.t.sol:GovernanceLifecycleForkTest
-[PASS] testBothPublishedSubmissionsThroughFullGovernance() (gas: 3659946)
-[PASS] testIneligibleAccountCannotSubmitPublishedProposal() (gas: 224377)
-[PASS] testProposalWithoutVotesIsDefeated() (gas: 1169678)
-[PASS] testProposerCanCancelPendingPublishedProposal() (gas: 1271075)
-Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 88.96ms (12.15ms CPU time)
+[PASS] testBothPublishedSubmissionsThroughFullGovernance() (gas: 3659994)
+[PASS] testIneligibleAccountCannotSubmitPublishedProposal() (gas: 224497)
+[PASS] testProposalWithoutVotesIsDefeated() (gas: 1169726)
+[PASS] testProposerCanCancelPendingPublishedProposal() (gas: 1271123)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 7.71s (12.65s CPU time)
 
 
-Ran 2 test suites in 91.50ms (174.75ms CPU time): 7 tests passed, 0 failed, 0 skipped (7 total tests)
+Ran 2 test suites in 7.71s (12.26s CPU time): 7 tests passed, 0 failed, 0 skipped (7 total tests)

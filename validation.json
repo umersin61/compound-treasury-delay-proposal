@@ -63,14 +63,14 @@
   ],
   "ci": {
     "repository": "umersin61/compound-treasury-delay-proposal",
-    "sourceCommit": "4a7a53247743fa1c636dda0b81d02549c250b4e4",
-    "runId": 36956685904,
-    "status": "previous run; current description revalidation pending",
+    "sourceCommit": "8a38fb37aa588aad6b7917848331f3ef6362744b",
+    "runId": 36998572058,
+    "status": "success",
     "jobs": {
-      "prepare": 110681082214,
-      "actionScenarios": 110681082347,
-      "gasProfiler": 110681082275,
-      "governanceEnactment": 110681082389
+      "prepare": 110810815772,
+      "actionScenarios": 110810815414,
+      "gasProfiler": 110810815823,
+      "governanceEnactment": 110810815704
     }
   },
   "tenderly": {
@@ -83,9 +83,9 @@
     "simulations": [
       {
         "submission": "proposal-1-submission.json",
-        "url": "https://dashboard.tenderly.co/shared/simulation/365871be-ff0d-4a64-8b11-ac489f75d788",
-        "status": "previous description; refresh pending",
-        "gasUsed": 963597,
+        "url": "https://dashboard.tenderly.co/shared/simulation/98410cb7-91a6-424a-8daa-67b35a5d3ec2",
+        "status": "success",
+        "gasUsed": 963645,
         "returnedProposalId": 612
       },
       {
@@ -103,5 +103,7 @@
     "proposal-2": "0x640ca4dfcd5dab40a03c8cea60f09e55f689e7093c62924773b11b99d5e9b971"
   },
   "descriptionFormatting": "First description uses the exact final Cactus wallet format: title, one newline, Summary\\n-------, then unchanged body. Proposal 2 full description is unchanged.",
-  "currentSubmissionValidation": "Pending fresh fork and Tenderly validation after Cactus description normalization"
+  "currentSubmissionValidation": "PASS: final Cactus description and all five action calldatas re-encoded and validated through full governance; fresh Tenderly submission also succeeded",
+  "validationBlockScope": "Full governance fork: 26104181. Independent Tenderly submission simulations: 26101617.",
+  "walletParameterReview": "Final user-supplied decoded parameters match targets, values, all five complete action calldatas and description. Raw outer calldata, chain ID, outer ETH value and sender not supplied; chat Markdown escapes treated as presentation escaping."
 }
