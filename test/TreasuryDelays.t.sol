@@ -42,7 +42,7 @@ contract TreasuryDelaysForkTest {
     uint256 eta;
 
     function setUp() public {
-        vm.createSelectFork(vm.envString("MAINNET_RPC_URL"), vm.envOr("FORK_BLOCK", uint256(26094833)));
+        vm.createSelectFork(vm.envString("MAINNET_RPC_URL"), vm.envOr("FORK_BLOCK", uint256(26101617)));
     }
 
     function _executeThroughGovernorTimelock(address target, bytes memory data) internal {

@@ -32,19 +32,6 @@
   ],
   "transactionsBroadcast": false,
   "combinedForkSimulation": "PASS: 7 passed; 0 failed; 0 skipped",
-  "ci": {
-    "repository": "umersin61/compound-treasury-delay-proposal",
-    "pullRequest": 1,
-    "sourceCommit": "412805feca6c35ad20ac2a030868bea3e9a526ac",
-    "runId": 36842316875,
-    "status": "success",
-    "jobs": {
-      "prepare": 110304071227,
-      "actionScenarios": 110304071454,
-      "gasProfiler": 110304071522,
-      "governanceEnactment": 110304071628
-    }
-  },
   "lifecycleTests": [
     {
       "name": "testBothPublishedSubmissionsThroughFullGovernance",
@@ -67,35 +54,52 @@
       "gas": 929051
     }
   ],
-  "tenderlySimulation": "PASS: two independent proposal submission simulations; full enactment is verified by Foundry, not Tenderly",
+  "tenderlySimulation": "Refresh in progress",
   "notVerified": [
     "Eventual submitting wallet eligibility",
     "Guardian intervention",
     "Actual delegate endorsement or voting intentions",
     "Concurrent live treasury actions"
   ],
-  "tenderly": {
-    "scope": "Tenderly links show two independent `propose(...)` submission simulations at mainnet block 26,094,833 using the exact published unsigned calldata and an impersonated existing delegate. Both succeeded without storage, balance, vote or quorum overrides. Each independent simulation returns proposal ID 612; neither is a sequential enactment or proof of final treasury state. Full two-stage voting, queueing and execution are covered by the seven passing Foundry fork tests. Bundled Tenderly simulations require an upgrade on the current account.",
+  "previousValidation": {
     "blockNumber": 26094833,
-    "chainId": 1,
-    "sender": "0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5",
-    "target": "0x309a862bbC1A00e45506cB8A802D1ff10004c8C0",
-    "stateOverrides": false,
-    "simulations": [
-      {
-        "submission": "proposal-1-submission.json",
-        "url": "https://dashboard.tenderly.co/shared/simulation/4ea0a48e-b048-4ce0-b714-3c4f3ab2daea",
-        "status": "success",
-        "gasUsed": 915843,
-        "returnedProposalId": 612
-      },
-      {
-        "submission": "proposal-2-submission.json",
-        "url": "https://dashboard.tenderly.co/shared/simulation/0ad27016-028e-44d5-bba1-15774cc41973",
-        "status": "success",
-        "gasUsed": 444748,
-        "returnedProposalId": 612
+    "ci": {
+      "repository": "umersin61/compound-treasury-delay-proposal",
+      "pullRequest": 1,
+      "sourceCommit": "412805feca6c35ad20ac2a030868bea3e9a526ac",
+      "runId": 36842316875,
+      "status": "success",
+      "jobs": {
+        "prepare": 110304071227,
+        "actionScenarios": 110304071454,
+        "gasProfiler": 110304071522,
+        "governanceEnactment": 110304071628
       }
-    ]
-  }
+    },
+    "tenderly": {
+      "scope": "Tenderly links show two independent `propose(...)` submission simulations at mainnet block 26,094,833 using the exact published unsigned calldata and an impersonated existing delegate. Both succeeded without storage, balance, vote or quorum overrides. Each independent simulation returns proposal ID 612; neither is a sequential enactment or proof of final treasury state. Full two-stage voting, queueing and execution are covered by the seven passing Foundry fork tests. Bundled Tenderly simulations require an upgrade on the current account.",
+      "blockNumber": 26094833,
+      "chainId": 1,
+      "sender": "0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5",
+      "target": "0x309a862bbC1A00e45506cB8A802D1ff10004c8C0",
+      "stateOverrides": false,
+      "simulations": [
+        {
+          "submission": "proposal-1-submission.json",
+          "url": "https://dashboard.tenderly.co/shared/simulation/4ea0a48e-b048-4ce0-b714-3c4f3ab2daea",
+          "status": "success",
+          "gasUsed": 915843,
+          "returnedProposalId": 612
+        },
+        {
+          "submission": "proposal-2-submission.json",
+          "url": "https://dashboard.tenderly.co/shared/simulation/0ad27016-028e-44d5-bba1-15774cc41973",
+          "status": "success",
+          "gasUsed": 444748,
+          "returnedProposalId": 612
+        }
+      ]
+    }
+  },
+  "revision": "Expanded proposal 1 description rebuilt; fresh validation in progress. Previous results apply only to the prior revision."
 }

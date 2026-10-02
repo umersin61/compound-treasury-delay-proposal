@@ -11,7 +11,7 @@ permissions:
 
 env:
   MAINNET_RPC_URL: https://rpc.flashbots.net
-  FORK_BLOCK: "26094833"
+  FORK_BLOCK: "26101617"
   NO_COLOR: "1"
 
 jobs:
@@ -37,6 +37,8 @@ jobs:
           node --check verify_payloads.cjs
           npm run verify | tee prepare.log
           python scripts/check_rebuild.py | tee -a prepare.log
+          python build_payloads.py
+          python scripts/refresh_preflight.py | tee -a prepare.log
           sha256sum --check SHA256SUMS | tee -a prepare.log
       - uses: actions/upload-artifact@v4
         with:

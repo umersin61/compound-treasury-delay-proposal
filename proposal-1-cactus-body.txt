@@ -1,5 +1,3 @@
-# Aligning Treasury Delays with the Governance Process
-
 ## Summary
 
 Increase the Treasury Escrow withdrawal cooldown and the Treasury Timelock minimum delay from two days to ten days. Set the Escrow expiration to seventeen days from initiation, preserving a seven-day withdrawal window after the cooldown.
