@@ -1,5 +1,6 @@
-[PASS] testCooldownFirstRevertsAtPinnedConfiguration() (gas: 9495)
-[PASS] testGovernanceCanCancelScheduledDelayChange() (gas: 284870)
-[PASS] testTwoStageExecution() (gas: 331813)
-Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 17.91s (4.81s CPU time)
-Ran 1 test suite in 25.90s (17.91s CPU time): 3 tests passed, 0 failed, 0 skipped (3 total tests)
+Mainnet block 26101617 (2026-10-02 02:21:23 UTC)
+7 passed; 0 failed; 0 skipped
+Live preflight, ABI checks, deterministic regeneration, Cactus imports, formatting and all four CI jobs: PASS
+Both exact published submissions proposed, voted, queued and executed on the fork.
+Tenderly: both independent submissions PASS; submission only.
+No live transaction broadcast.

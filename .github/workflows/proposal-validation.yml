@@ -45,7 +45,7 @@ jobs:
           name: prepared-treasury-delay-proposals
           path: |
             proposal-*.json
-            proposal-*-description.txt
+            proposal-*.txt
             transactions.json
             prepare.log
             SHA256SUMS

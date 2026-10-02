@@ -1,16 +1,16 @@
 {
   "chainId": 1,
-  "blockNumber": 26094833,
-  "blockTimeUTC": "2026-10-01T03:39:23+00:00",
+  "blockNumber": 26101617,
+  "blockTimeUTC": "2026-10-02T02:21:23+00:00",
   "abiEncoding": "PASS: independent eth_abi and ethers encoders agree",
   "livePreflight": "PASS: admin, proposer, current delays, bounds, operation hash and unused salt",
   "forkTestCompilation": "PASS: solc 0.8.34",
   "forkSimulation": "PASS: 3 passed; 0 failed; 0 skipped",
   "governanceLifecycleSimulation": "PASS: 4 passed; 0 failed; 0 skipped; both published submissions proposed, voted, queued and executed through the existing Governor",
   "proposerEligibility": "Verified on fork for impersonated existing delegate 0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5; eventual submitting wallet not specified or verified",
-  "blockHash": "0xdf709374144ccf5a15919d1543b4a09825a29c9dc4008e9b8c7da1a5da23e68d",
+  "blockHash": "0x9c49a1271d9f1aca7145795adc96a2db65acb6843b4b62321a19845cd9b65217",
   "forkScope": "Action tests impersonate Governor at Governor Timelock. Lifecycle tests impersonate existing delegates, submit exact published unsigned payloads to live Governor and complete voting/quorum/queue/execute. No storage, token balance, vote or quorum manipulation.",
-  "rpc": "https://rpc.flashbots.net",
+  "rpc": "https://ethereum-rpc.publicnode.com",
   "forgeVersion": "1.7.1",
   "solcVersion": "0.8.34",
   "tests": [
@@ -36,70 +36,70 @@
     {
       "name": "testBothPublishedSubmissionsThroughFullGovernance",
       "status": "PASS",
-      "gas": 2040708
+      "gas": 2062190
     },
     {
       "name": "testIneligibleAccountCannotSubmitPublishedProposal",
       "status": "PASS",
-      "gas": 44630
+      "gas": 49588
     },
     {
       "name": "testProposalWithoutVotesIsDefeated",
       "status": "PASS",
-      "gas": 921170
+      "gas": 942670
     },
     {
       "name": "testProposerCanCancelPendingPublishedProposal",
       "status": "PASS",
-      "gas": 929051
+      "gas": 950551
     }
   ],
-  "tenderlySimulation": "Refresh in progress",
+  "tenderlySimulation": "PASS: two fresh independent proposal submission simulations; full enactment verified by Foundry",
   "notVerified": [
     "Eventual submitting wallet eligibility",
     "Guardian intervention",
     "Actual delegate endorsement or voting intentions",
     "Concurrent live treasury actions"
   ],
-  "previousValidation": {
-    "blockNumber": 26094833,
-    "ci": {
-      "repository": "umersin61/compound-treasury-delay-proposal",
-      "pullRequest": 1,
-      "sourceCommit": "412805feca6c35ad20ac2a030868bea3e9a526ac",
-      "runId": 36842316875,
-      "status": "success",
-      "jobs": {
-        "prepare": 110304071227,
-        "actionScenarios": 110304071454,
-        "gasProfiler": 110304071522,
-        "governanceEnactment": 110304071628
-      }
-    },
-    "tenderly": {
-      "scope": "Tenderly links show two independent `propose(...)` submission simulations at mainnet block 26,094,833 using the exact published unsigned calldata and an impersonated existing delegate. Both succeeded without storage, balance, vote or quorum overrides. Each independent simulation returns proposal ID 612; neither is a sequential enactment or proof of final treasury state. Full two-stage voting, queueing and execution are covered by the seven passing Foundry fork tests. Bundled Tenderly simulations require an upgrade on the current account.",
-      "blockNumber": 26094833,
-      "chainId": 1,
-      "sender": "0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5",
-      "target": "0x309a862bbC1A00e45506cB8A802D1ff10004c8C0",
-      "stateOverrides": false,
-      "simulations": [
-        {
-          "submission": "proposal-1-submission.json",
-          "url": "https://dashboard.tenderly.co/shared/simulation/4ea0a48e-b048-4ce0-b714-3c4f3ab2daea",
-          "status": "success",
-          "gasUsed": 915843,
-          "returnedProposalId": 612
-        },
-        {
-          "submission": "proposal-2-submission.json",
-          "url": "https://dashboard.tenderly.co/shared/simulation/0ad27016-028e-44d5-bba1-15774cc41973",
-          "status": "success",
-          "gasUsed": 444748,
-          "returnedProposalId": 612
-        }
-      ]
+  "ci": {
+    "repository": "umersin61/compound-treasury-delay-proposal",
+    "sourceCommit": "4a7a53247743fa1c636dda0b81d02549c250b4e4",
+    "runId": 36956685904,
+    "status": "success",
+    "jobs": {
+      "prepare": 110681082214,
+      "actionScenarios": 110681082347,
+      "gasProfiler": 110681082275,
+      "governanceEnactment": 110681082389
     }
   },
-  "revision": "Expanded proposal 1 description rebuilt; fresh validation in progress. Previous results apply only to the prior revision."
+  "tenderly": {
+    "scope": "Two independent propose(...) submissions at mainnet block 26,101,617, using the exact published unsigned calldata and an impersonated existing eligible delegate. Both succeeded without storage, balance, vote or quorum overrides. Each returns simulated proposal ID 612. These links demonstrate submission only; the seven Foundry fork tests verify full two-stage governance and final treasury settings.",
+    "blockNumber": 26101617,
+    "chainId": 1,
+    "sender": "0x3B6431fb5C71105cB3EaB2Cf058B135d4cCFc9C5",
+    "target": "0x309a862bbC1A00e45506cB8A802D1ff10004c8C0",
+    "stateOverrides": false,
+    "simulations": [
+      {
+        "submission": "proposal-1-submission.json",
+        "url": "https://dashboard.tenderly.co/shared/simulation/365871be-ff0d-4a64-8b11-ac489f75d788",
+        "status": "success",
+        "gasUsed": 963597,
+        "returnedProposalId": 612
+      },
+      {
+        "submission": "proposal-2-submission.json",
+        "url": "https://dashboard.tenderly.co/shared/simulation/cce3e1b0-d7fd-4e5b-9817-00d6705a2dcc",
+        "status": "success",
+        "gasUsed": 444748,
+        "returnedProposalId": 612
+      }
+    ]
+  },
+  "cactusImports": "PASS: Safe Transaction Builder format, full calldata, contract metadata and decoded arguments independently re-encoded against verified ABIs; all imported actions equal corresponding Governor proposal arrays.",
+  "descriptionHashes": {
+    "proposal-1": "0x537ece041eec1c94c9447593bdf08f10b0650052e3a6284536b26743817de1b0",
+    "proposal-2": "0x640ca4dfcd5dab40a03c8cea60f09e55f689e7093c62924773b11b99d5e9b971"
+  }
 }
