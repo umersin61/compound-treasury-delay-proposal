@@ -19,9 +19,9 @@ Cactus currently redirects proposal creation to **Sign in to create a proposal /
 ## 3. Enter the exact title and description
 
 - Title: copy `proposal-1-cactus-title.txt` — `Aligning Treasury Delays with the Governance Process`.
-- Description: copy `proposal-1-cactus-body.txt` as Markdown. It starts with `## Summary`; do not repeat the title in the body.
+- Description: copy `proposal-1-cactus-body.txt` as Markdown. It starts with `Summary` followed by `-------`; this matches the final Markdown produced by the Cactus editor. Do not repeat the title in the body or add a leading blank line.
 
-The complete description encoded in the tested submission is `# ` + title + two newline characters + body, with no extra terminal newline. It is also available in `proposal-1-description.txt` and the `description` field of `proposal-1.json`.
+The complete description encoded in the tested submission is `# ` + title + one newline character + body, with no extra terminal newline. It is also available in `proposal-1-description.txt` and the `description` field of `proposal-1.json`.
 
 Do not append a different forum reply URL, change wording, add a simulation link, or alter spacing after validation. The reference links already appear in the tested text. An altered description requires rebuilding and revalidating the submission. Check the rendered preview for literal Markdown or a duplicated title.
 
@@ -66,10 +66,10 @@ Recipient: 0x309a862bbC1A00e45506cB8A802D1ff10004c8C0 (current Governor)
 ETH value: 0
 Function: propose(address[],uint256[],bytes[],string)
 Action count: 5
-Expected description hash: 0x537ece041eec1c94c9447593bdf08f10b0650052e3a6284536b26743817de1b0
+Expected description hash: 0x82f0b7d85c7bcfec335056b094348e83a0ee7f3859ed8ca7748c5fe91d6efeee
 ```
 
-The exact expected transaction calldata is the `data` field of `proposal-1-submission.json`. Cactus's wallet-gated builder was not connected during preparation, so its final wallet calldata has not been inspected. Verify that the builder has preserved the tested description and calls. If the wallet can copy/export transaction data, save it as JSON (or save only the raw hex data) and compare from the repository root:
+The exact expected transaction calldata is the `data` field of `proposal-1-submission.json`. The proposer supplied decoded wallet parameters; the first submission was rebuilt to match their title, description, ordered targets, zero values and all five complete action calldatas. Raw outer calldata, chain ID and outer ETH value were not supplied. Verify those wallet fields as well. If the wallet can copy/export transaction data, save it as JSON (or save only the raw hex data) and compare from the repository root:
 
 ```sh
 node scripts/check_wallet_transaction.cjs proposal-1 wallet-transaction.json
@@ -127,4 +127,4 @@ Tenderly verifies two independent submissions only. Foundry verifies both comple
 - Action imports: https://docs.tally.xyz/how-to-use-tally/proposals/creating-proposals/import-and-export-proposal-actions/
 - Description standard: https://docs.tally.xyz/set-up-and-technical-documentation/governor-proposals/whats-the-standard-for-governor-proposal-descriptions/
 
-The public entry point and current wallet connection requirement were observed directly. Import and editing steps follow the official documentation; the wallet-gated creation form was not operated.
+The public entry point and current wallet connection requirement were observed directly. Import steps follow the official documentation. The final description and decoded calls were supplied by the proposer from their wallet; the agent did not connect or sign in that wallet.

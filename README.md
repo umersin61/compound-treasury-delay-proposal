@@ -1,3 +1,5 @@
+> The first submission now matches the proposer’s final Cactus wallet description. Fresh validation is in progress; evidence links below currently refer to the prior description.
+
 # Compound treasury delay proposal
 
 Unsigned Ethereum mainnet governance submissions for increasing the Treasury Escrow withdrawal cooldown and Treasury Timelock minimum delay to 10 days.

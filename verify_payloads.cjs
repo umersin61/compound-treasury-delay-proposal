@@ -41,7 +41,7 @@ for (const name of ['proposal-1','proposal-2']) {
  }
  const title=fs.readFileSync(name+'-cactus-title.txt','utf8');
  const body=fs.readFileSync(name+'-cactus-body.txt','utf8');
- assert.equal('# '+title+'\n\n'+body,p.description);
+ assert.equal('# '+title+'\n'+body,p.description);
  assert.equal(fs.readFileSync(name+'-description.txt','utf8'),p.description);
  const sub=JSON.parse(fs.readFileSync(name+'-submission.json'));
  assert.equal(governor.encodeFunctionData('propose',[p.targets,p.values,p.calldatas,p.description]),sub.data);

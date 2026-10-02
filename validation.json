@@ -65,7 +65,7 @@
     "repository": "umersin61/compound-treasury-delay-proposal",
     "sourceCommit": "4a7a53247743fa1c636dda0b81d02549c250b4e4",
     "runId": 36956685904,
-    "status": "success",
+    "status": "previous run; current description revalidation pending",
     "jobs": {
       "prepare": 110681082214,
       "actionScenarios": 110681082347,
@@ -84,7 +84,7 @@
       {
         "submission": "proposal-1-submission.json",
         "url": "https://dashboard.tenderly.co/shared/simulation/365871be-ff0d-4a64-8b11-ac489f75d788",
-        "status": "success",
+        "status": "previous description; refresh pending",
         "gasUsed": 963597,
         "returnedProposalId": 612
       },
@@ -99,7 +99,9 @@
   },
   "cactusImports": "PASS: Safe Transaction Builder format, full calldata, contract metadata and decoded arguments independently re-encoded against verified ABIs; all imported actions equal corresponding Governor proposal arrays.",
   "descriptionHashes": {
-    "proposal-1": "0x537ece041eec1c94c9447593bdf08f10b0650052e3a6284536b26743817de1b0",
+    "proposal-1": "0x82f0b7d85c7bcfec335056b094348e83a0ee7f3859ed8ca7748c5fe91d6efeee",
     "proposal-2": "0x640ca4dfcd5dab40a03c8cea60f09e55f689e7093c62924773b11b99d5e9b971"
-  }
+  },
+  "descriptionFormatting": "First description uses the exact final Cactus wallet format: title, one newline, Summary\\n-------, then unchanged body. Proposal 2 full description is unchanged.",
+  "currentSubmissionValidation": "Pending fresh fork and Tenderly validation after Cactus description normalization"
 }
