@@ -38,7 +38,7 @@ jobs:
           npm run verify | tee prepare.log
           python scripts/check_rebuild.py | tee -a prepare.log
           python build_payloads.py
-          python scripts/refresh_preflight.py | tee -a prepare.log
+          node scripts/refresh_preflight.cjs | tee -a prepare.log
           sha256sum --check SHA256SUMS | tee -a prepare.log
       - uses: actions/upload-artifact@v4
         with:
