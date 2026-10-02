@@ -22,6 +22,6 @@ with tempfile.TemporaryDirectory() as directory:
         assert actual == expected, name
         name = prefix + "-description.txt"
         assert (stage / name).read_bytes() == (ROOT / name).read_bytes(), name
-        for suffix in ("-cactus-title.txt", "-cactus-body.txt"):
+        for suffix in ("-cactus-title.txt", "-cactus-body.txt", "-cactus-actions.json"):
             assert (stage / (prefix + suffix)).read_bytes() == (ROOT / (prefix + suffix)).read_bytes(), prefix + suffix
 print("PASS: deterministic regeneration of both unsigned submissions and every action.")

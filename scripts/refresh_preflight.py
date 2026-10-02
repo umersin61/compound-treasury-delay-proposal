@@ -12,7 +12,7 @@ RPC = os.environ.get('MAINNET_RPC_URL', 'https://rpc.flashbots.net')
 BLOCK = int(os.environ['FORK_BLOCK'])
 
 def rpc(method, params):
-    request = urllib.request.Request(RPC, data=json.dumps(dict(jsonrpc='2.0', id=1, method=method, params=params)).encode(), headers={'Content-Type': 'application/json'})
+    request = urllib.request.Request(RPC, data=json.dumps(dict(jsonrpc='2.0', id=1, method=method, params=params)).encode(), headers={'Content-Type': 'application/json', 'User-Agent': 'compound-treasury-delay-proposal/1.0'})
     result = json.load(urllib.request.urlopen(request, timeout=60))
     if 'error' in result:
         raise RuntimeError(result['error'])
@@ -21,12 +21,10 @@ def rpc(method, params):
 checks = json.loads((ROOT / 'preflight-calls.json').read_text())
 for name, output in [('timelock', 'address'), ('votingDelay', 'uint256'), ('votingPeriod', 'uint256'), ('proposalThreshold', 'uint256')]:
     checks.append(dict(label='governor.' + name, target='0x309a862bbc1a00e45506cb8a802d1ff10004c8c0', callData='0x' + keccak(text=name + '()')[:4].hex(), outputType=output))
-data = keccak(text='aggregate3((address,bool,bytes)[])')[:4] + encode(['(address,bool,bytes)[]'], [[(c['target'], False, bytes.fromhex(c['callData'][2:])) for c in checks]])
-result = rpc('eth_call', [dict(to='0xcA11bde05977b3631167028862bE2a173976CA11', data='0x' + data.hex()), hex(BLOCK)])
 values = {}
-for check, (success, raw) in zip(checks, decode(['(bool,bytes)[]'], bytes.fromhex(result[2:]))[0]):
-    assert success, check['label']
-    value = decode([check['outputType']], raw)[0]
+for check in checks:
+    result = rpc('eth_call', [dict(to=check['target'], data=check['callData']), hex(BLOCK)])
+    value = decode([check['outputType']], bytes.fromhex(result[2:]))[0]
     values[check['label']] = '0x' + value.hex() if isinstance(value, bytes) else value
 block = rpc('eth_getBlockByNumber', [hex(BLOCK), False])
 assert values['blockNumber'] == BLOCK

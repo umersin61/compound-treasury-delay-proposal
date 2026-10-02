@@ -50,6 +50,20 @@ def build():
       title, body = descriptions[index].split('\n\n', 1)
       (ROOT/(name+'-cactus-title.txt')).write_text(title.removeprefix('# '))
       (ROOT/(name+'-cactus-body.txt')).write_text(body)
+      input_names = {
+        'setWithdrawExpiration': ['_expiration'], 'setWithdrawCooldown': ['_cooldown'],
+        'grantRole': ['role', 'account'],
+        'schedule': ['target', 'value', 'data', 'predecessor', 'salt', 'delay'],
+        'execute': ['target', 'value', 'payload', 'predecessor', 'salt']
+      }
+      imported = []
+      for a in actions:
+        method, parameters = a['signature'].split('(', 1)
+        types = parameters[:-1].split(',')
+        names = input_names[method]
+        imported.append(dict(to=a['target'], value=a['value'], data=a['calldata'], contractMethod=dict(inputs=[dict(name=n, type=t) for n,t in zip(names,types)], name=method, payable=method=='execute'), contractInputsValues={n: str(v) for n,v in zip(names,a['arguments'])}))
+      batch = dict(version='1.0', chainId='1', createdAt=1790907683000, meta=dict(name=title.removeprefix('# '), description='Governance action import only; submit through the Compound Governor', txBuilderVersion='1.17.1'), transactions=imported)
+      (ROOT/(name+'-cactus-actions.json')).write_text(json.dumps(batch,indent=2)+'\n')
       submission = dict(chainId=1,to=GOVERNOR,value='0',data=calldata('propose(address[],uint256[],bytes[],string)',['address[]','uint256[]','bytes[]','string'],[args['targets'],[0]*len(actions),[bytes.fromhex(d[2:]) for d in args['calldatas']],args['description']]),function='propose(address[],uint256[],bytes[],string)',descriptionHash='0x'+keccak(text=args['description']).hex(),status='Prepared only; refer to validation.json for simulation status; proposer eligibility not verified')
       (ROOT/(name+'-submission.json')).write_text(json.dumps(submission,indent=2)+'\n')
     checks=[]

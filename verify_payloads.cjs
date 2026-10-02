@@ -28,6 +28,21 @@ assert.equal(treasury.decodeFunctionData('updateDelay',scheduled[2])[0],864000n)
 const governor=new Interface(['function propose(address[],uint256[],bytes[],string) returns (uint256)']);
 for (const name of ['proposal-1','proposal-2']) {
  const p=JSON.parse(fs.readFileSync(name+'.json'));
+ const batch=JSON.parse(fs.readFileSync(name+'-cactus-actions.json'));
+ assert.equal(batch.version,'1.0'); assert.equal(batch.chainId,'1');
+ assert.equal(batch.transactions.length,p.targets.length);
+ for(let i=0;i<batch.transactions.length;i++) {
+   const tx=batch.transactions[i];
+   assert.equal(tx.to,p.targets[i]); assert.equal(tx.value,p.values[i]); assert.equal(tx.data,p.calldatas[i]);
+   const fragment=interfaces[tx.to].getFunction(tx.contractMethod.name);
+   assert.deepEqual(tx.contractMethod.inputs,fragment.inputs.map(v=>({name:v.name,type:v.type})));
+   assert.equal(tx.contractMethod.payable,fragment.payable);
+   assert.equal(interfaces[tx.to].encodeFunctionData(tx.contractMethod.name,tx.contractMethod.inputs.map(v=>tx.contractInputsValues[v.name])),tx.data);
+ }
+ const title=fs.readFileSync(name+'-cactus-title.txt','utf8');
+ const body=fs.readFileSync(name+'-cactus-body.txt','utf8');
+ assert.equal('# '+title+'\n\n'+body,p.description);
+ assert.equal(fs.readFileSync(name+'-description.txt','utf8'),p.description);
  const sub=JSON.parse(fs.readFileSync(name+'-submission.json'));
  assert.equal(governor.encodeFunctionData('propose',[p.targets,p.values,p.calldatas,p.description]),sub.data);
  assert.equal(keccak256(toUtf8Bytes(p.description)),sub.descriptionHash);
