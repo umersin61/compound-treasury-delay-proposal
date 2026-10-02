@@ -51,7 +51,7 @@ contract GovernanceLifecycleForkTest {
     event GovernanceEnacted(uint256 proposalId, uint256 snapshot, uint256 deadline, uint256 eta);
 
     function setUp() public {
-        vm.createSelectFork(vm.envString("MAINNET_RPC_URL"), vm.envOr("FORK_BLOCK", uint256(26101617)));
+        vm.createSelectFork(vm.envString("MAINNET_RPC_URL"), vm.envOr("FORK_BLOCK", uint256(26104181)));
         require(governor.clock() == block.number, "Expected block-number governance clock");
         address[3] memory candidates = [DELEGATE, FOUNDATION, WOOF];
         for (uint256 i; i < candidates.length; ++i) {
