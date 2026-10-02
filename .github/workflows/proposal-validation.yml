@@ -12,6 +12,7 @@ permissions:
 env:
   MAINNET_RPC_URL: https://ethereum-rpc.publicnode.com
   FORK_BLOCK: "26101617"
+  PREFLIGHT_BLOCK: latest
   NO_COLOR: "1"
 
 jobs:

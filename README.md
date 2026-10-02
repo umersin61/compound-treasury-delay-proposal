@@ -10,7 +10,7 @@ Unsigned Ethereum mainnet governance submissions for increasing the Treasury Esc
 
 | № | Action name | Link | Status |
 | --- | --- | --- | --- |
-| 1 | Prepare / pinned live preflight / ABI and import checks | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082214) | Success |
+| 1 | Prepare / live preflight / ABI and import checks | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082214) | Success |
 | 2 | Run Forge Tests / treasury scenarios and formatting | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082347) | Success |
 | 3 | Run Tests With Gas Profiler | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082275) | Success |
 | 4 | Run Enact by Delegator / both governance lifecycles | [Link](https://github.com/umersin61/compound-treasury-delay-proposal/actions/runs/36956685904/job/110681082389) | Success |
@@ -87,11 +87,11 @@ npm run verify
 python -m pip install -r requirements.txt
 python scripts/check_rebuild.py
 python build_payloads.py
-MAINNET_RPC_URL=https://ethereum-rpc.publicnode.com FORK_BLOCK=26101617 python scripts/refresh_preflight.py
+MAINNET_RPC_URL=https://ethereum-rpc.publicnode.com PREFLIGHT_BLOCK=latest node scripts/refresh_preflight.cjs
 sha256sum --check SHA256SUMS
 ```
 
-Any mainnet archive endpoint serving the pinned block can be used. Regeneration does not refresh recorded fork results. The preflight reader accepts `FORK_BLOCK` to check a later block and fails if recorded treasury preconditions have changed.
+Fork reproduction requires an archive endpoint that serves the recorded block; the public endpoint now requires a personal token for older state. Supply an appropriate `MAINNET_RPC_URL` for the fork. Regeneration does not refresh recorded fork results. CI keeps the fork pinned and checks live treasury preconditions at the latest block minus two using `PREFLIGHT_BLOCK=latest`; the chosen preflight block and hash appear in the job output. The committed preflight records remain the verified simulation-block snapshot. The preflight fails if treasury preconditions have changed.
 
 ## Files
 

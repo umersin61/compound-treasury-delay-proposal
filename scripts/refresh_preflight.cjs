@@ -2,12 +2,14 @@
 const fs = require('fs');
 const assert = require('assert/strict');
 const { JsonRpcProvider, AbiCoder, id } = require('ethers');
-const block = Number(process.env.FORK_BLOCK);
-assert(Number.isSafeInteger(block) && block > 0, 'Set FORK_BLOCK');
+const requested = process.env.PREFLIGHT_BLOCK || process.env.FORK_BLOCK;
+let block = Number(requested);
+if (requested !== 'latest') assert(Number.isSafeInteger(block) && block > 0, 'Set FORK_BLOCK or PREFLIGHT_BLOCK=latest');
 const provider = new JsonRpcProvider(process.env.MAINNET_RPC_URL || 'https://ethereum-rpc.publicnode.com', 1, {staticNetwork: true, batchMaxCount: 1});
-const tag = '0x' + block.toString(16);
 const abi = AbiCoder.defaultAbiCoder();
 async function main() {
+ if (requested === 'latest') block = Number(BigInt(await provider.send('eth_blockNumber',[]))) - 2;
+ const tag = '0x' + block.toString(16);
  const checks = JSON.parse(fs.readFileSync('preflight-calls.json', 'utf8'));
  for (const [name, outputType] of [['timelock','address'],['votingDelay','uint256'],['votingPeriod','uint256'],['proposalThreshold','uint256']]) checks.push({label:'governor.'+name,target:'0x309a862bbc1a00e45506cb8a802d1ff10004c8c0',callData:id(name+'()').slice(0,10),outputType});
  const values = {};
